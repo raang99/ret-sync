@@ -219,6 +219,7 @@ class RequestHandler(object):
     def req_rbase(self, hash):
         rbase = hash['rbase']
         self.base_remote = rbase
+        idaapi.rebase_program(self.rebase_remote(0), idc.MSF_FIXONCE)
 
     # log command output request at addr
     def req_cmd(self, hash):
@@ -777,7 +778,6 @@ class RequestHandler(object):
         self.prev_node = None
         self.name = idaapi.get_root_filename()
         self.base = idaapi.get_imagebase()
-        rs_log("module base 0x%x" % self.base)
         self.base_remote = None
         self.gm = GraphManager()
         self.hexsync = Syncrays()
